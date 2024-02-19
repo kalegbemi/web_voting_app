@@ -1,11 +1,9 @@
 package com.capstone_project.web_voting_app.service;
 
-import com.example.demovoting.dto.CandidateEmailDetails;
-import com.example.demovoting.dto.CandidateRequest;
-
-import com.example.demovoting.enom.Role;
-import com.example.demovoting.model.Candidate;
-import com.example.demovoting.repository.CandidateRepository;
+import com.capstone_project.web_voting_app.dto.CandidateRequest;
+import com.capstone_project.web_voting_app.enom.Role;
+import com.capstone_project.web_voting_app.model.Candidate;
+import com.capstone_project.web_voting_app.repository.CandidateRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
