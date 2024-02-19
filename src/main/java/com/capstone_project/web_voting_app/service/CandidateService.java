@@ -1,5 +1,6 @@
 package com.capstone_project.web_voting_app.service;
 
+import com.capstone_project.web_voting_app.dto.CandidateEmailDetails;
 import com.capstone_project.web_voting_app.dto.CandidateRequest;
 import com.capstone_project.web_voting_app.enom.Role;
 import com.capstone_project.web_voting_app.model.Candidate;
