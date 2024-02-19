@@ -1,6 +1,7 @@
 package com.capstone_project.web_voting_app.service;
 
 import com.capstone_project.web_voting_app.dto.UserRegistrationRequest;
+import com.capstone_project.web_voting_app.enom.Role;
 import com.capstone_project.web_voting_app.model.Voter;
 import com.capstone_project.web_voting_app.repository.VoterRepository;
 import lombok.RequiredArgsConstructor;
