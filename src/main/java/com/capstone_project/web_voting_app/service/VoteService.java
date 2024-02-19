@@ -1,6 +1,7 @@
 package com.capstone_project.web_voting_app.service;
 
 import com.capstone_project.web_voting_app.dto.VoteRequest;
+import com.capstone_project.web_voting_app.model.Election;
 import com.capstone_project.web_voting_app.model.Vote;
 import com.capstone_project.web_voting_app.repository.ElectionRepository;
 import com.capstone_project.web_voting_app.repository.VoteRepository;
