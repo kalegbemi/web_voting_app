@@ -1,6 +1,8 @@
 package com.capstone_project.web_voting_app.repository;
 
+import com.capstone_project.web_voting_app.model.Candidate;
 import com.capstone_project.web_voting_app.model.Vote;
+import com.capstone_project.web_voting_app.model.Voter;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
