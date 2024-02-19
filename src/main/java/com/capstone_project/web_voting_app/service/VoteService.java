@@ -5,6 +5,7 @@ import com.capstone_project.web_voting_app.model.Election;
 import com.capstone_project.web_voting_app.model.Vote;
 import com.capstone_project.web_voting_app.repository.ElectionRepository;
 import com.capstone_project.web_voting_app.repository.VoteRepository;
+import com.capstone_project.web_voting_app.repository.VoterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
