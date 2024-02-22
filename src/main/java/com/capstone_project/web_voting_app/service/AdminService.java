@@ -1,9 +1,11 @@
 package com.capstone_project.web_voting_app.service;
 
 import com.capstone_project.web_voting_app.dto.AdminRegisterRequest;
+import com.capstone_project.web_voting_app.dto.AdminUpdateRequest;
 import com.capstone_project.web_voting_app.dto.AuthenticationRequest;
 import com.capstone_project.web_voting_app.dto.AuthenticationResponse;
 import com.capstone_project.web_voting_app.enom.Role;
+import com.capstone_project.web_voting_app.exception.AdminNotFoundException;
 import com.capstone_project.web_voting_app.model.Admin;
 import com.capstone_project.web_voting_app.repository.AdminRepository;
 import com.capstone_project.web_voting_app.security.service.JwtService;
@@ -13,7 +15,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-    @Service
+import java.util.List;
+
+@Service
     @RequiredArgsConstructor
     public class AdminService {
 
@@ -47,7 +51,23 @@ import org.springframework.stereotype.Service;
             adminRepository.save(admin);
             String jwtToken = jwtService.generateToken(admin);
             return AuthenticationResponse.builder().token(jwtToken).build();
+        }
+        public List<Admin> getAllAdmins() {
+            return adminRepository.findAll();
+    }
+        public Admin getAdminById(int id) {
+            return adminRepository.findById(id).orElseThrow(()->new AdminNotFoundException("Admin with id: " + id + "can not be found"));
+        }
+        public Admin updateAdmin(int id, AdminUpdateRequest updateRequest) {
 
+            Admin toUpdate = getAdminById(id);
+            toUpdate.setPassword(updateRequest.getPassword());
+            toUpdate.setFullName(updateRequest.getFullName());
+            toUpdate.setEmail(updateRequest.getEmail());
+            return adminRepository.save(toUpdate);
         }
 
+        public void deleteAdmin(int id) {
+            adminRepository.deleteById(id);
+        }
     }
