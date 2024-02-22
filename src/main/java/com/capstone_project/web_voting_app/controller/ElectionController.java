@@ -1,5 +1,6 @@
 package com.capstone_project.web_voting_app.controller;
 
+import com.capstone_project.web_voting_app.dto.ElectionPageableResponse;
 import com.capstone_project.web_voting_app.dto.ElectionRequest;
 import com.capstone_project.web_voting_app.dto.HttpResponse;
 import com.capstone_project.web_voting_app.enom.Status;
@@ -21,11 +22,13 @@ public class ElectionController {
 
         private final ElectionService electionService;
 
-        @GetMapping("/all")
-        public ResponseEntity<List<Election>> getAllElections(){
-            return electionService.findAllElection();
-        }
-
+    @GetMapping("/all")
+    public ResponseEntity<ElectionPageableResponse> getAllElections(
+            @RequestParam( value = "pageNo",defaultValue = "0",required = false) int pageNo,
+            @RequestParam(value = "pageSize", defaultValue = "5",required = false) int pageSize
+    ){
+        return electionService.findAllElection(pageNo, pageSize);
+    }
         @GetMapping("/getById")
         public ResponseEntity<String> findById(@RequestParam("id") Long id){
             return electionService.findElectionById(id);
