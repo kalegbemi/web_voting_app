@@ -42,7 +42,7 @@ import java.util.List;
 
     @PutMapping("/admins/{id}")
     public Admin updateAdmin(@PathVariable int id, @RequestBody AdminUpdateRequest adminUpdateRequest) {
-        return adminService.updateAdmin(id, adminUpdateRequest);
+        return adminService.updateAdmin(id,adminUpdateRequest);
     }
     @DeleteMapping("/admins/{id}")
     public void deleteAdmin(@PathVariable int id) {
