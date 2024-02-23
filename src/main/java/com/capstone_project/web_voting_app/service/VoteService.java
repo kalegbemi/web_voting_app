@@ -48,15 +48,15 @@ public class VoteService {
     }
 
     public ResponseEntity<String> castVote(VoteRequest voteRequest) {
-        LocalDateTime dateTime1 = LocalDateTime.of(2024,02,4,8,00,00);
-        LocalDateTime dateTime2 = LocalDateTime.of(2024,02,4,17,00,00);
+        Election election = electionRepository.findById(voteRequest.getElectionId()).orElseThrow();
+        LocalDateTime dateTime1 = election.getStartDate();
+        LocalDateTime dateTime2 = election.getEndDate();
         LocalDateTime votingTime = LocalDateTime.now();
 
         Vote vote1 = new Vote();
         Voter voter = voterRepository.findById(voteRequest.getVoterId()).orElseThrow();
         List<Vote> vote = voteRepository.findByVoter(voter);
 
-        Election election = electionRepository.findById(voteRequest.getElectionId()).orElseThrow();
         Candidate candidate = candidateRepository.findById(voteRequest.getCandidateId()).orElseThrow();
         if (votingTime.isAfter(dateTime1) && votingTime.isBefore(dateTime2)) {
             if (isExist(vote, election.getId())){
