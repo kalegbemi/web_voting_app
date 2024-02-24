@@ -13,10 +13,13 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+
 @Component
 @Slf4j
 public class EmailService {
     public static final String SUBJECT = "welcome Onboard";
+    private static final String NOTIFICATION_REMINDER = "ELECTION NOTIFICATION / REMINDER";
 
     private final String From = "kydjams@gmail.com";
     private static final String UTF_8_ENCODING = "UTF-8";
@@ -56,14 +59,13 @@ public class EmailService {
             helper.setSubject(SUBJECT);
             mailSender.send(message);
 
-            String messageString = message.toString();
-            log.info("mimemessage sent using 2 parameters {} and {}", name, role);
-            System.out.println(messageString);
 
         } catch (MessagingException e) {
             throw new RuntimeException(e.getMessage());
         }
     }
+
+
 
     public void sendCandidateMessage(CandidateEmailDetails details) {
         log.info("sending email to candidate {}", details.getName());
@@ -76,12 +78,27 @@ public class EmailService {
             helper.setText(MessageUtil.getCandidateMessage(details));
             mailSender.send(message);
 
-            String messageString = message.toString();
-            log.info("mimemessage sent using candidate dto {}", details);
-            System.out.println(messageString);
+
         } catch (MessagingException e) {
             log.error(e.getMessage());
         }
 
+    }
+
+    public void sendMessage24Hrbefore(String to, String name, String electionTitle, LocalDateTime time) {
+        try {
+            MimeMessage message = mailSender.createMimeMessage();
+            MimeMessageHelper helper = new MimeMessageHelper(message);
+            helper.setPriority(1);
+            helper.setText(MessageUtil.Message24HrBeforeElection(name, electionTitle, time));
+            helper.setTo(to);
+            helper.setFrom(From);
+            helper.setSubject(NOTIFICATION_REMINDER);
+            mailSender.send(message);
+
+
+        } catch (MessagingException e) {
+            throw new RuntimeException(e.getMessage());
+        }
     }
 }
