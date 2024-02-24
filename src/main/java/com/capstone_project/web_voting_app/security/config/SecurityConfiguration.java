@@ -10,8 +10,8 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-     @Configuration
-     public class SecurityConfiguration {
+@Configuration
+    public class SecurityConfiguration {
 
         @Autowired
         private JwtAuthenticationFilter jwtAuthenticationFilter;
