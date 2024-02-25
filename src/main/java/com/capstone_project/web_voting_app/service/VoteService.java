@@ -1,14 +1,8 @@
 package com.capstone_project.web_voting_app.service;
 
 import com.capstone_project.web_voting_app.dto.VoteRequest;
-import com.capstone_project.web_voting_app.model.Candidate;
-import com.capstone_project.web_voting_app.model.Election;
-import com.capstone_project.web_voting_app.model.Vote;
-import com.capstone_project.web_voting_app.model.Voter;
-import com.capstone_project.web_voting_app.repository.CandidateRepository;
-import com.capstone_project.web_voting_app.repository.ElectionRepository;
-import com.capstone_project.web_voting_app.repository.VoteRepository;
-import com.capstone_project.web_voting_app.repository.VoterRepository;
+import com.capstone_project.web_voting_app.model.*;
+import com.capstone_project.web_voting_app.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
@@ -31,6 +25,9 @@ public class VoteService {
 
     @Autowired
     private ElectionRepository electionRepository;
+
+    @Autowired
+    private ElectionResultRepository electionResultRepository;
 
     @Cacheable("getVoteByElectionId")
     public ResponseEntity<Vote> getElectionById(long id) {
@@ -67,6 +64,7 @@ public class VoteService {
                 vote1.setCandidate(candidate);
                 vote1.setVotingTime(votingTime);
                 voteRepository.save(vote1);
+
                 return new ResponseEntity<>("successfully voted", HttpStatus.CREATED);
             } else {
                 return new ResponseEntity<>("Already voted for this candidate", HttpStatus.BAD_REQUEST);
