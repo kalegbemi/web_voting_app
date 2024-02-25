@@ -22,16 +22,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
             httpSecurity
                     .csrf(AbstractHttpConfigurer::disable)
                     .authorizeHttpRequests(auth ->
-                            auth.requestMatchers("api/v1/voter/save","api/v1/admin/register","api/v1/admin/login")
-                                    .permitAll()
-                                    //.requestMatchers("api/v1/saveCandidate").hasAuthority(Authorit)
-                                    .anyRequest()
-                                    .authenticated())
+                                    auth/*.requestMatchers("api/v1/voter/save","api/v1/admin/register",
+                                        "api/v1/admin/login","api/v1/castVote")
+                                .permitAll()*/
+                                            .requestMatchers("api/v1/**").permitAll()
+                            //.requestMatchers("api/v1/saveCandidate").hasAuthority(Authorit)
+                            // .anyRequest()
+                            // .authenticated()
+                    )
                     .sessionManagement(session ->session
                             .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                     .authenticationProvider(authenticationProvider)
                     .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
             return httpSecurity.build();
         }
-
     }
