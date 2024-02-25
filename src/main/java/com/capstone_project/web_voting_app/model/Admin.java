@@ -19,8 +19,9 @@ import java.util.List;
     @NoArgsConstructor
     @Entity
     public class Admin implements UserDetails {
-        @jakarta.persistence.Id
-        @GeneratedValue
+
+        @Id
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private int Id;
 
         private String password;

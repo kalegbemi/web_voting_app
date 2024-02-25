@@ -9,31 +9,35 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 @Configuration
-    public class SecurityConfiguration {
+public class SecurityConfiguration {
 
-        @Autowired
-        private JwtAuthenticationFilter jwtAuthenticationFilter;
-        @Autowired
-        private AuthenticationProvider authenticationProvider;
+    @Autowired
+    private JwtAuthenticationFilter jwtAuthenticationFilter;
+    @Autowired
+    private AuthenticationProvider authenticationProvider;
 
-        @Bean
-        public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
-            httpSecurity
-                    .csrf(AbstractHttpConfigurer::disable)
-                    .authorizeHttpRequests(auth ->
-                                    auth/*.requestMatchers("api/v1/voter/save","api/v1/admin/register",
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
+        httpSecurity
+                .csrf(AbstractHttpConfigurer::disable)
+                .authorizeHttpRequests(auth ->
+                                auth/*.requestMatchers("api/v1/voter/save","api/v1/admin/register",
                                         "api/v1/admin/login","api/v1/castVote")
                                 .permitAll()*/
-                                            .requestMatchers("api/v1/**").permitAll()
-                            //.requestMatchers("api/v1/saveCandidate").hasAuthority(Authorit)
-                            // .anyRequest()
-                            // .authenticated()
-                    )
-                    .sessionManagement(session ->session
-                            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                    .authenticationProvider(authenticationProvider)
-                    .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
-            return httpSecurity.build();
-        }
+                                        .requestMatchers("api/v1/**").permitAll()
+                        //.requestMatchers("api/v1/saveCandidate").hasAuthority(Authorit)
+                        // .anyRequest()
+                        // .authenticated()
+                )
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+        return httpSecurity.build();
+
     }
+
+}
