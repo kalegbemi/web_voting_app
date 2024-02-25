@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -21,7 +22,7 @@ public class ElectionResultController {
         return electionResultService.getTotalResult(candidateId,electionId);
     }
 @GetMapping("/candidateresult/{electionId}")
-    public Map<String, Serializable> getTotalResultByCandidate(@PathVariable long electionId) {
+    public List<Map<String, Serializable>> getTotalResultByCandidate(@PathVariable long electionId) {
     return electionResultService.getTotalResultByCandidate(electionId);
     }
 }
