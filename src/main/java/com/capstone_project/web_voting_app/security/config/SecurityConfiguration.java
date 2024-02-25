@@ -24,13 +24,12 @@ public class SecurityConfiguration {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
-                                auth/*.requestMatchers("api/v1/voter/save","api/v1/admin/register",
-                                        "api/v1/admin/login","api/v1/castVote")
-                                .permitAll()*/
-                                        .requestMatchers("api/v1/**").permitAll()
-                        //.requestMatchers("api/v1/saveCandidate").hasAuthority(Authorit)
-                        // .anyRequest()
-                        // .authenticated()
+                        auth.requestMatchers("api/v1/voter/save", "api/v1/admin/login", "api/v1/castVote")
+                                .permitAll()
+                                .requestMatchers("api/v1/**")
+                                .hasAnyAuthority("ADMIN")
+                                .anyRequest()
+                                .authenticated()
                 )
                 .sessionManagement(session -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
