@@ -18,7 +18,7 @@ import java.time.LocalDateTime;
 @Component
 @Slf4j
 public class EmailService {
-    public static final String SUBJECT = "welcome Onboard";
+    public static final String SUBJECT = "WELCOME ONBOARD";
     private static final String NOTIFICATION_REMINDER = "ELECTION NOTIFICATION / REMINDER";
 
     private final String From = "kydjams@gmail.com";
@@ -48,15 +48,15 @@ public class EmailService {
 
     }
 
-    public void sendMessage(String to, String name, String role) {
+    public void sendMessage(String to, String body, String sbj) {
         try {
             MimeMessage message = mailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message);
             helper.setPriority(1);
-            helper.setText(MessageUtil.getVoterMessage(name, role));
+            helper.setText(body);
             helper.setTo(to);
             helper.setFrom(From);
-            helper.setSubject(SUBJECT);
+            helper.setSubject(sbj);
             mailSender.send(message);
 
 
