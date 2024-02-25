@@ -13,7 +13,8 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class VoteController {
-    private VoteService voteService;
+
+    private final VoteService voteService;
 
     @PostMapping("/castVote")
     public ResponseEntity<String> castVote(@RequestBody VoteRequest voteRequest) {
