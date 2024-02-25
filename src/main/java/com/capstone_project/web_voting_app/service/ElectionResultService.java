@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 @Service
@@ -36,8 +37,9 @@ public class ElectionResultService {
         );
     }
 
-    public Map<String, Serializable> getTotalResultByCandidate(long electionId) {
+    public List<Map<String, Serializable>> getTotalResultByCandidate(long electionId) {
         List<Vote> votes = voteRepository.findAllByElectionId(electionId);
+        List<Map<String, Serializable>> mapList = new ArrayList<>();
 
         Integer electionResult = votes.size();
         {
@@ -46,14 +48,15 @@ public class ElectionResultService {
             Integer candidateResult = voteRepository.findByCandidate(candidate).size();
             Election election = electionRepository.findById(electionId).orElseThrow();
             String name = candidate.getFirstName() + " " + candidate.getLastName();
-            return Map.of("Candidate name ", name,
+            Map<String, Serializable> map = Map.of("Candidate name ", name,
                     "Candidate result", candidateResult,
                     "Total vote for " + election.getTitle(), electionResult,
                     "Party", candidate.getPartyAffiliation()
 
             );
+            mapList.add(map);
         }
-        return Map.of("Total result",electionResult );
+        return mapList.stream().distinct().toList();
 
     }
 
