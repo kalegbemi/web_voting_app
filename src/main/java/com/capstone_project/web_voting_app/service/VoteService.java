@@ -10,6 +10,7 @@ import com.capstone_project.web_voting_app.repository.ElectionRepository;
 import com.capstone_project.web_voting_app.repository.VoteRepository;
 import com.capstone_project.web_voting_app.repository.VoterRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -46,7 +47,7 @@ public class VoteService {
 
         return new ResponseEntity<>(voteRepository.findAll(),HttpStatus.OK);
     }
-
+    @CacheEvict(value = "castVote", allEntries = true)
     public ResponseEntity<String> castVote(VoteRequest voteRequest) {
         Election election = electionRepository.findById(voteRequest.getElectionId()).orElseThrow();
         LocalDateTime dateTime1 = election.getStartDate();
