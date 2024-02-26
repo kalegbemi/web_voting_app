@@ -5,7 +5,6 @@ import com.capstone_project.web_voting_app.model.Election;
 import com.capstone_project.web_voting_app.model.Vote;
 import com.capstone_project.web_voting_app.repository.CandidateRepository;
 import com.capstone_project.web_voting_app.repository.ElectionRepository;
-import com.capstone_project.web_voting_app.repository.ElectionResultRepository;
 import com.capstone_project.web_voting_app.repository.VoteRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ import java.util.Map;
 @Service
 @RequiredArgsConstructor
 public class ElectionResultService {
-    private final ElectionResultRepository electionResultRepository;
+
     private final VoteRepository voteRepository;
     private final CandidateRepository candidateRepository;
     private final ElectionRepository electionRepository;
