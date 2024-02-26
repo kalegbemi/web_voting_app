@@ -6,6 +6,7 @@ import com.capstone_project.web_voting_app.dto.AuthenticationRequest;
 import com.capstone_project.web_voting_app.dto.AuthenticationResponse;
 import com.capstone_project.web_voting_app.model.Admin;
 import com.capstone_project.web_voting_app.service.AdminService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ import java.util.List;
     public AdminService adminService;
 
     @PostMapping("/register")
-    public ResponseEntity<Admin> register(@RequestBody AdminRegisterRequest request) {
+    public ResponseEntity<Admin> register(@Valid @RequestBody AdminRegisterRequest request) {
         return new ResponseEntity<>(adminService.register(request), HttpStatusCode.valueOf(200));
     }
 
