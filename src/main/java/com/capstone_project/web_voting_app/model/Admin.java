@@ -3,6 +3,7 @@ package com.capstone_project.web_voting_app.model;
 import com.capstone_project.web_voting_app.enom.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -18,6 +19,7 @@ import java.util.List;
     @AllArgsConstructor
     @NoArgsConstructor
     @Entity
+    @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
     public class Admin implements UserDetails {
 
         @Id
@@ -26,11 +28,8 @@ import java.util.List;
 
         private String password;
 
-        @Column(name = "full_name")
-        @Length(min = 6, message = "Enter your first and last name")
         private String fullName;
 
-        @Email(message = "Enter a valid email")
         private String email;
 
         @Enumerated(value = EnumType.STRING)
