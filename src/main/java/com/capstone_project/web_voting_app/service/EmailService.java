@@ -35,8 +35,7 @@ public class EmailService {
             message.setFrom(From);
             message.setTo(email);
             message.setSubject(SUBJECT);
-            message.setText("Hello " + name + ",\n\nYou have been registered as a " + role + " on the INGRYD VOTING APPLICATION." +
-                    "\n\nFurther information will be communicated as the needs arises.\n\n\n\nThank you,\n\nSupport team.");
+            message.setText(MessageUtil.getVoterMessage(name, role));
             mailSender.send(message);
             String messageString = message.toString();
             System.out.println(messageString);
