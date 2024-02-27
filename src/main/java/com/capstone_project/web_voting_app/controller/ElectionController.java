@@ -6,6 +6,7 @@ import com.capstone_project.web_voting_app.dto.HttpResponse;
 import com.capstone_project.web_voting_app.enom.Status;
 import com.capstone_project.web_voting_app.model.Election;
 import com.capstone_project.web_voting_app.service.ElectionService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +17,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/election")
+@SecurityRequirement(name = "bearer auth")
 public class ElectionController {
 
 

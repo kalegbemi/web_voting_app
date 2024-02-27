@@ -58,10 +58,7 @@ public class VoterService {
     public void deleteVoter(long voterId) {
         voterRepository.deleteById(voterId);
     }
-    public boolean authenticateVoter(String username, String password) {
-        Voter voter = voterRepository.findByEmail(username);
-        return voter != null && voter.getPassword().equals(password);
-    }
+
     @CacheEvict(value = "singleVoter", allEntries = true)
     public String updateVoter(long id, UserRegistrationRequest request) {
         Optional<Voter> optionalVoter = voterRepository.findById(id);

@@ -3,6 +3,7 @@ package com.capstone_project.web_voting_app.controller;
 import com.capstone_project.web_voting_app.dto.VoteRequest;
 import com.capstone_project.web_voting_app.model.Vote;
 import com.capstone_project.web_voting_app.service.VoteService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +13,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
+@SecurityRequirement(name = "bearer auth")
 public class VoteController {
 
     private final VoteService voteService;
