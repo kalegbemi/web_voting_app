@@ -1,5 +1,6 @@
 package com.capstone_project.web_voting_app.security.config;
 
+import io.swagger.v3.oas.annotations.Parameter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,11 +21,22 @@ public class SecurityConfiguration {
 
 
     @Bean
+
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth ->
-                        auth.requestMatchers("api/v1/voter/save", "api/v1/admin/login", "api/v1/castVote")
+                        auth.requestMatchers("api/v1/voter/save",
+                                        "api/v1/admin/login",
+                                        "api/v1/castVote",
+                                        "/v3/api-docs/**",
+                                        "/swagger-ui.html",
+                                        "/webjars/**",
+                                        "/configuration/security",
+                                        "/configuration/ui",
+                                        "/v3/api-docs",
+                                        "/v3/api-docs.yaml",
+                                        "swagger-ui/**")
                                 .permitAll()
                                 .requestMatchers("api/v1/**")
                                 .hasAnyAuthority("ADMIN")
