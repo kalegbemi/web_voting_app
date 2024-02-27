@@ -26,8 +26,6 @@ public class VoteService {
     @Autowired
     private ElectionRepository electionRepository;
 
-    @Autowired
-    private ElectionResultRepository electionResultRepository;
 
     @Cacheable("getVoteByElectionId")
     public ResponseEntity<Vote> getElectionById(long id) {
