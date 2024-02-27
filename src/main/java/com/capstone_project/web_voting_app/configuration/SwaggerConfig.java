@@ -28,16 +28,16 @@ import org.springframework.context.annotation.Configuration;
                 url = "https://ingrydacademy.edu")
                 ),
         servers = @Server(description = "DEV-ENVIRONMENT",
-                url="http://localhost:8080"),
-        security = {
+                url="http://localhost:8080")
+        /*security = {
                 @SecurityRequirement(
                         name = "bearertoken auth")
-        }
+        }*/
         )
 
 @SecurityScheme(
         type = SecuritySchemeType.HTTP,
-        name = "bearertoken auth",
+        name = "bearer auth",
         description = "JWT authorization",
         scheme = "bearer",
         bearerFormat = "JWT",

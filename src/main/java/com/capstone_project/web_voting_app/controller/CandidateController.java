@@ -3,6 +3,7 @@ package com.capstone_project.web_voting_app.controller;
 import com.capstone_project.web_voting_app.dto.CandidateRequest;
 import com.capstone_project.web_voting_app.model.Candidate;
 import com.capstone_project.web_voting_app.service.CandidateService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -13,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1")
+@SecurityRequirement(name = "bearer auth")
 public class CandidateController {
 
     @Autowired

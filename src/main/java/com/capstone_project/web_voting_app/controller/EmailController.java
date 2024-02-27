@@ -10,6 +10,7 @@ import com.capstone_project.web_voting_app.repository.CandidateRepository;
 import com.capstone_project.web_voting_app.repository.ElectionRepository;
 import com.capstone_project.web_voting_app.repository.VoterRepository;
 import com.capstone_project.web_voting_app.service.EmailService;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +23,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("api/v1/mail")
+@SecurityRequirement(name = "bearer auth")
 public class EmailController {
     @Autowired
     private EmailService emailService;
