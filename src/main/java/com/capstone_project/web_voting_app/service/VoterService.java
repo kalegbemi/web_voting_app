@@ -49,8 +49,8 @@ public class VoterService {
     public List<Voter> getAllVoters() {
         return voterRepository.findAll();
     }
-    @Cacheable(value = "singleVoter", key = "id")
-    public Optional<Voter> getVoterById(long voterId) {
+    @Cacheable(value = "singleVoter")
+    public Optional<Voter> getVoterById(Long voterId) {
 
         return voterRepository.findById(voterId);
     }

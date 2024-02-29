@@ -39,4 +39,18 @@ public class GlobalExceptionHandler {
         return errorMap;
     }
 
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(ElectionNotFoundException.class)
+    public String electionExceptionHandler(ElectionNotFoundException exception){
+
+        return exception.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(AdminNotFoundException.class)
+    public String adminExceptionHandler(AdminNotFoundException exception){
+
+        return exception.toString()+exception.getMessage();
+    }
+
 }

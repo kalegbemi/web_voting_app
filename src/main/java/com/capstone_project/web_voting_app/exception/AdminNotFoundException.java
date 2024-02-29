@@ -4,4 +4,9 @@ package com.capstone_project.web_voting_app.exception;
         public AdminNotFoundException(String message) {
             super(message);
         }
-}
+
+        @Override
+        public String toString() {
+            return "AdminNotFoundException: ";
+        }
+    }

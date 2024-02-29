@@ -42,15 +42,18 @@ import java.util.List;
         }
 
         public AuthenticationResponse authenticate(AuthenticationRequest request){
-            authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                    request.getUsername(),request.getPassword()
-            ));
 
             Admin admin = adminRepository.findByEmail(request.getUsername())
-                    .orElseThrow(()->new RuntimeException("WRONG EMAIL OR PASSWORD ENTERED"));
-            adminRepository.save(admin);
-            String jwtToken = jwtService.generateToken(admin);
-            return AuthenticationResponse.builder().token(jwtToken).build();
+                    .orElseThrow(() -> new AdminNotFoundException("WRONG EMAIL OR PASSWORD ENTERED"));
+
+               authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
+                       request.getUsername(), request.getPassword()
+               ));
+
+               //adminRepository.save(admin);
+               String jwtToken = jwtService.generateToken(admin);
+               return AuthenticationResponse.builder().token(jwtToken).build();
+
         }
         @Cacheable("allAdmins")
         public List<Admin> getAllAdmins() {
