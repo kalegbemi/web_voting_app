@@ -6,11 +6,9 @@ public class ElectionNotFoundException extends RuntimeException {
         super(message);
     }
 
-    public ElectionNotFoundException() {
-    }
 
     @Override
     public String toString() {
-        return "ElectionNotFoundException{}";
+        return "ElectionNotFoundException:  ";
     }
 }

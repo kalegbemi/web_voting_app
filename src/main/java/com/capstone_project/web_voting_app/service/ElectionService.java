@@ -17,8 +17,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -69,7 +67,7 @@ public class ElectionService {
 
     public ResponseEntity<Election> updateElectionById(Long id, ElectionRequest request) {
         Election election2Update = electionRepo.findById(id).orElseThrow(
-                ElectionNotFoundException::new);
+                ()->new ElectionNotFoundException("election not found"));
         election2Update.setTitle(request.getTitle());
         election2Update.setStartDate(request.getStartDate());
         election2Update.setEndDate(request.getEndDate());
@@ -90,25 +88,17 @@ public class ElectionService {
         return new ResponseEntity<>(election, HttpStatusCode.valueOf(200));
     }
 
-    public ResponseEntity<HttpResponse> deleteElectionById(Long id) throws URISyntaxException {
+    public ResponseEntity<HttpResponse> deleteElectionById(Long id) {
         if (!electionRepo.existsById(id)){
             throw new ElectionNotFoundException("Election not found");
         }
 
-        URI uri = new URI("votemanagement",
-                "http",
-                "localhost",
-                8080,
-                "/election/deleteelectionbyid",
-                "id",
-                "");
         electionRepo.deleteById(id);
         return ResponseEntity.ok().body(
                 HttpResponse.builder()
                         .timeStamp(LocalDateTime.now().toString())
                         .status(HttpStatus.OK.name())
                         .requestMethod("getMapping")
-                        .path(uri.getPath())
                         .statusCode(HttpStatus.OK.value())
                         .message("Election with ID "+id+", has been successfully deleted")
                         .build()

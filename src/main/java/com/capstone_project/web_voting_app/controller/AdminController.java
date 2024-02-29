@@ -29,7 +29,7 @@ import java.util.List;
     }
 
     @PostMapping("/login")
-    public AuthenticationResponse login(@RequestBody AuthenticationRequest request) {
+    public AuthenticationResponse login(@RequestBody @Valid AuthenticationRequest request) throws Throwable {
         return adminService.authenticate(request);
     }
 
@@ -47,7 +47,7 @@ import java.util.List;
 
     @SecurityRequirement(name = "bearer auth")
     @PutMapping("/admins/{id}")
-    public Admin updateAdmin(@PathVariable int id, @RequestBody AdminUpdateRequest adminUpdateRequest) {
+    public Admin updateAdmin(@PathVariable int id, @Valid @RequestBody AdminUpdateRequest adminUpdateRequest) {
         return adminService.updateAdmin(id,adminUpdateRequest);
     }
     @SecurityRequirement(name = "bearer auth")

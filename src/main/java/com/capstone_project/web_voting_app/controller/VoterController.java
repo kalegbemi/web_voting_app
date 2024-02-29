@@ -30,13 +30,13 @@ public class VoterController {
     }
     @SecurityRequirement(name = "bearer auth")
     @GetMapping("/voters/{id}")
-    public Voter getVoterById(@PathVariable long id){
+    public Voter getVoterById(@PathVariable Long id){
 
         return voterService.getVoterById(id).orElse(null);
     }
     @SecurityRequirement(name = "bearer auth")
     @PutMapping("/voters/{id}")
-    public String updateVoter(@PathVariable long id, @RequestBody UserRegistrationRequest updateRequest) {
+    public String updateVoter(@PathVariable Long id, @RequestBody UserRegistrationRequest updateRequest) {
         return voterService.updateVoter(id, updateRequest);
     }
     @SecurityRequirement(name = "bearer auth")
