@@ -7,6 +7,7 @@ import com.capstone_project.web_voting_app.enom.Status;
 import com.capstone_project.web_voting_app.model.Election;
 import com.capstone_project.web_voting_app.service.ElectionService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class ElectionController {
         }
 
         @PostMapping("/save")
-        public ResponseEntity<Election> saveElection(@RequestBody ElectionRequest request){
+        public ResponseEntity<Election> saveElection(@Valid @RequestBody ElectionRequest request){
             return electionService.createElection(request);
         }
 
@@ -52,12 +53,12 @@ public class ElectionController {
         }
 
         @PutMapping("/updateElection/{id}")
-        public ResponseEntity<Election> updateElectionById(@PathVariable Long id, @RequestBody ElectionRequest request){
+        public ResponseEntity<Election> updateElectionById(@PathVariable Long id, @Valid @RequestBody ElectionRequest request){
             return electionService.updateElectionById(id, request);
         }
 
         @DeleteMapping("/deleteelectionbyid/{id}")
-        public ResponseEntity<HttpResponse> deleteElectionById(@PathVariable Long id) throws URISyntaxException {
+        public ResponseEntity<HttpResponse> deleteElectionById(@PathVariable Long id) {
             return electionService.deleteElectionById(id);
         }
 }
