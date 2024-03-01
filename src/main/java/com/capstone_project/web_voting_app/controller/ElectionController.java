@@ -39,6 +39,7 @@ public class ElectionController {
 
         @PostMapping("/save")
         public ResponseEntity<Election> saveElection(@Valid @RequestBody ElectionRequest request){
+
             return electionService.createElection(request);
         }
 
@@ -54,6 +55,7 @@ public class ElectionController {
 
         @PutMapping("/updateElection/{id}")
         public ResponseEntity<Election> updateElectionById(@PathVariable Long id, @Valid @RequestBody ElectionRequest request){
+
             return electionService.updateElectionById(id, request);
         }
 

@@ -4,6 +4,7 @@ import com.capstone_project.web_voting_app.dto.CandidateRequest;
 import com.capstone_project.web_voting_app.model.Candidate;
 import com.capstone_project.web_voting_app.service.CandidateService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,7 +21,7 @@ public class CandidateController {
     @Autowired
     private CandidateService candidateService;
     @PostMapping("/saveCandidate")
-    public Candidate registerCandidate(@RequestBody CandidateRequest request) {
+    public Candidate registerCandidate(@RequestBody @Valid CandidateRequest request) {
         return candidateService.registerCandidate(request);
     }
     @GetMapping("/candidate/{id}")
@@ -36,7 +37,7 @@ public class CandidateController {
     }
 
     @PutMapping("/candidate/{id}")
-    public String updateCandidate(@PathVariable long id, @RequestBody Candidate candidate) {
+    public String updateCandidate(@PathVariable long id, @RequestBody @Valid Candidate candidate) {
         return candidateService.updateCandidate(id, candidate);
     }
     @DeleteMapping("/candidate/{id}")
