@@ -38,7 +38,8 @@ public class ElectionController {
         }
 
         @PostMapping("/save")
-        public ResponseEntity<Election> saveElection(@RequestBody @Valid ElectionRequest request){
+        public ResponseEntity<Election> saveElection(@Valid @RequestBody ElectionRequest request){
+
             return electionService.createElection(request);
         }
 
@@ -53,12 +54,13 @@ public class ElectionController {
         }
 
         @PutMapping("/updateElection/{id}")
-        public ResponseEntity<Election> updateElectionById(@PathVariable Long id, @RequestBody @Valid ElectionRequest request){
+        public ResponseEntity<Election> updateElectionById(@PathVariable Long id, @Valid @RequestBody ElectionRequest request){
+
             return electionService.updateElectionById(id, request);
         }
 
         @DeleteMapping("/deleteelectionbyid/{id}")
-        public ResponseEntity<HttpResponse> deleteElectionById(@PathVariable Long id) throws URISyntaxException {
+        public ResponseEntity<HttpResponse> deleteElectionById(@PathVariable Long id) {
             return electionService.deleteElectionById(id);
         }
 }
