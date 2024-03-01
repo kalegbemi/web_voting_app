@@ -4,6 +4,7 @@ import com.capstone_project.web_voting_app.dto.UserRegistrationRequest;
 import com.capstone_project.web_voting_app.model.Voter;
 import com.capstone_project.web_voting_app.service.VoterService;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,7 +19,7 @@ public class VoterController {
 
 
     @PostMapping("/save")
-    public Voter createVoter (@RequestBody UserRegistrationRequest request) {
+    public Voter createVoter (@RequestBody @Valid UserRegistrationRequest request) {
         return voterService.saveVoter(request);
     }
 
@@ -36,7 +37,7 @@ public class VoterController {
     }
     @SecurityRequirement(name = "bearer auth")
     @PutMapping("/voters/{id}")
-    public String updateVoter(@PathVariable Long id, @RequestBody UserRegistrationRequest updateRequest) {
+    public String updateVoter(@PathVariable Long id, @RequestBody @Valid UserRegistrationRequest updateRequest) {
         return voterService.updateVoter(id, updateRequest);
     }
     @SecurityRequirement(name = "bearer auth")
