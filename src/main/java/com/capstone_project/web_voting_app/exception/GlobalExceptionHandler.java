@@ -47,6 +47,20 @@ public class GlobalExceptionHandler {
     }
 
     @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(VoteNotFoundException.class)
+    public String voteExceptionHandler(VoteNotFoundException exception){
+
+        return exception.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
+    @ExceptionHandler(VoterNotFoundException.class)
+    public String voterExceptionHandler(VoterNotFoundException exception){
+
+        return exception.getMessage();
+    }
+
+    @ResponseStatus(HttpStatus.FORBIDDEN)
     @ExceptionHandler(AdminNotFoundException.class)
     public String adminExceptionHandler(AdminNotFoundException exception){
 

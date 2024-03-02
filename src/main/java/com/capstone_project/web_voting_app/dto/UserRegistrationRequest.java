@@ -1,12 +1,12 @@
 package com.capstone_project.web_voting_app.dto;
 
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import org.hibernate.validator.constraints.Length;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -15,16 +15,24 @@ import java.util.Date;
 @Builder
 @Data
 public class UserRegistrationRequest {
-    @NotNull
+    @Column(name = "first_name")
+    @Length(min = 4, max = 36, message = "Enter your first name")
+    @NotNull(message = "first name can't be null")
+    @NotBlank(message = "first name can't be blank")
     private String firstName;
 
-    @NotNull
+    @Column(name = "last_name")
+    @Length(min = 4, max = 36, message = "Enter your last name")
+    @NotNull(message = "last name can't be null")
+    @NotBlank(message = "last name can't be blank")
     private String lastName;
 
-    @NotNull
+    @NotNull(message = "Date of birth can't be null")
+    @NotBlank(message = "Date of birth can't be blank")
+    @FutureOrPresent
     private LocalDate DOB;
 
-    @Email
+    @Email(message = "Enter a valid email")
     private String email;
 
     @NotNull
