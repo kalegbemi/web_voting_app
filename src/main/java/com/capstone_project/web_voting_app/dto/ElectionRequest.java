@@ -20,6 +20,7 @@ public class ElectionRequest {
     @FutureOrPresent
     @NotNull
     private LocalDateTime startDate;
+    
     @Future
     @NotNull
     private LocalDateTime endDate;

@@ -22,26 +22,11 @@ public class Voter {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
-    @NotBlank
     private String firstName;
-
-    @NotNull
-    @NotBlank
     private String lastName;
-
-    @NotNull
     private LocalDate DOB;
-
-    @Email
     private String email;
-
-    @NotNull
-    @Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$")
     private String password;
-
-    @NotNull
     private  boolean eligible;
 
     @Enumerated(value = EnumType.STRING)

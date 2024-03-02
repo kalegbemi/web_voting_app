@@ -18,14 +18,8 @@ public class Election {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
     private String title;
-
-    @NotNull
     private LocalDateTime startDate;
-
-    @NotNull
     private LocalDateTime endDate;
 
     @Enumerated(value = EnumType.STRING)
