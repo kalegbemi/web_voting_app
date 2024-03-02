@@ -29,13 +29,17 @@ public class UserRegistrationRequest {
 
     @NotNull(message = "Date of birth can't be null")
     @NotBlank(message = "Date of birth can't be blank")
-    @FutureOrPresent
+    @Past
     private LocalDate DOB;
 
     @Email(message = "Enter a valid email")
     private String email;
 
     @NotNull
-    @Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,20}$")
+    @Pattern(regexp ="^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=]).{8,}$",
+            message = "password must contain" +
+            "at least 8 character, at least one of which must be lowercase" +
+            "uppercase" +
+            " and any of these special characters")
     private String password;
 }
