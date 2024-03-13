@@ -11,6 +11,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.net.URISyntaxException;
 import java.util.List;
@@ -22,45 +23,50 @@ import java.util.List;
 public class ElectionController {
 
 
+    private final ElectionService electionService;
 
-        private final ElectionService electionService;
-
+    /*    public ResponseEntity<ElectionPageableResponse> getAllElections(
+        public ModelAndView getAllElections(
+                @RequestParam( value = "pageNo",defaultValue = "0",required = false) int pageNo,
+                @RequestParam(value = "pageSize", defaultValue = "5",required = false) int pageSize
+        )*/
     @GetMapping("/all")
-    public ResponseEntity<ElectionPageableResponse> getAllElections(
-            @RequestParam( value = "pageNo",defaultValue = "0",required = false) int pageNo,
-            @RequestParam(value = "pageSize", defaultValue = "5",required = false) int pageSize
-    ){
-        return electionService.findAllElection(pageNo, pageSize);
+    public ModelAndView getAllElections() {
+        ModelAndView modelAndView = new ModelAndView("All-elections");
+        List<Election> electionList = electionService.findAllElection();
+        modelAndView.addObject("elections", electionList);
+        return modelAndView;
     }
-        @GetMapping("/getById")
-        public ResponseEntity<String> findById(@RequestParam("id") Long id){
-            return electionService.findElectionById(id);
-        }
 
-        @PostMapping("/save")
-        public ResponseEntity<Election> saveElection(@Valid @RequestBody ElectionRequest request){
+    @GetMapping("/getById")
+    public ResponseEntity<String> findById(@RequestParam("id") Long id) {
+        return electionService.findElectionById(id);
+    }
 
-            return electionService.createElection(request);
-        }
+    @PostMapping("/save")
+    public ResponseEntity<Election> saveElection(@Valid @RequestBody ElectionRequest request) {
 
-        @GetMapping("/getByStatus")
-        public ResponseEntity<List<Election>> findElectionByStatus(@RequestParam("status") Status status){
-            return electionService.findElectionByStatus(status);
-        }
+        return electionService.createElection(request);
+    }
 
-        @GetMapping("/getByTitle")
-        public ResponseEntity<Election> findElectionByTitle(@RequestParam("title") String title){
-            return electionService.findElectionByTitle(title);
-        }
+    @GetMapping("/getByStatus")
+    public ResponseEntity<List<Election>> findElectionByStatus(@RequestParam("status") Status status) {
+        return electionService.findElectionByStatus(status);
+    }
 
-        @PutMapping("/updateElection/{id}")
-        public ResponseEntity<Election> updateElectionById(@PathVariable Long id, @Valid @RequestBody ElectionRequest request){
+    @GetMapping("/getByTitle")
+    public ResponseEntity<Election> findElectionByTitle(@RequestParam("title") String title) {
+        return electionService.findElectionByTitle(title);
+    }
 
-            return electionService.updateElectionById(id, request);
-        }
+    @PutMapping("/updateElection/{id}")
+    public ResponseEntity<Election> updateElectionById(@PathVariable Long id, @Valid @RequestBody ElectionRequest request) {
 
-        @DeleteMapping("/deleteelectionbyid/{id}")
-        public ResponseEntity<HttpResponse> deleteElectionById(@PathVariable Long id) {
-            return electionService.deleteElectionById(id);
-        }
+        return electionService.updateElectionById(id, request);
+    }
+
+    @DeleteMapping("/deleteelectionbyid/{id}")
+    public ResponseEntity<HttpResponse> deleteElectionById(@PathVariable Long id) {
+        return electionService.deleteElectionById(id);
+    }
 }

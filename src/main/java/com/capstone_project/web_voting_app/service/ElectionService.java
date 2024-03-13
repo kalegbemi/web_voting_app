@@ -48,7 +48,7 @@ public class ElectionService {
         return ResponseEntity.ok(election);
     }
 
-    public ResponseEntity<ElectionPageableResponse> findAllElection(int pageNo, int pageSize) {
+   /* public ResponseEntity<ElectionPageableResponse> findAllElection(int pageNo, int pageSize) {
         Pageable pageable = PageRequest.of(pageNo, pageSize);
         Page<Election> electionPage = electionRepo.findAll(pageable);
         List<Election> electionList = electionPage.getContent();
@@ -63,6 +63,10 @@ public class ElectionService {
                 .build();
 
         return ResponseEntity.ok(EPR);
+    }*/
+
+    public List<Election> findAllElection(){
+        return electionRepo.findAll();
     }
 
     public ResponseEntity<Election> updateElectionById(Long id, ElectionRequest request) {
