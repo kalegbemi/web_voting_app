@@ -19,20 +19,10 @@ public class Candidate {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
     private String firstName;
-
-    @NotNull
     private String lastName;
-
-    @NotNull
     private String  partyAffiliation;
-
-    @NotNull
     private String position;
-
-    @Email
     private String email;
 
     @Enumerated(value = EnumType.STRING)
